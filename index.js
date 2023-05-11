@@ -1,6 +1,13 @@
-if (window.location.hash != ''){
+if (localStorage.getItem('access_token') != null){
+  access_token = localStorage.getItem('access_token')
+  console.log("got token from localStorage, token:");
+  console.log(access_token);
+}
+
+if (window.location.hash != '' && localStorage.getItem('access_token') == null){
   access_token = window.location.hash.substring(14);
   console.log(access_token);
+  localStorage.setItem('access_token', access_token);
 }
 
 async function logIn() {
