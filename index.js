@@ -60,7 +60,7 @@ function searchFiles(q="", pageSize){
 
   fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&pageSize=${pageSize}&supportsAllDrives=true&fields=files(id,name,mimeType)`, {
     method: 'GET',
-    headers:new Headers({Authorization:"Bearer " + info['access_token']})
+    headers:new Headers({Authorization:"Bearer " + access_token})
   })
   .then((res) => res.json())
   .then((info) => {
