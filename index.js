@@ -9,7 +9,6 @@ if (localStorage.getItem('access_token') != null){
 
   let search = document.getElementById('search')
   const queryInput = document.getElementById('query');
-  search.onclick = listFiles
 
 } else if (window.location.hash != ''){
   pattern = /&token.*/;
@@ -21,7 +20,10 @@ if (localStorage.getItem('access_token') != null){
   document.getElementById('logout').style.visibility = 'visible';
   document.getElementById('search').style.visibility = 'visible';
   document.getElementById('query').style.visibility = 'visible';
+
 }
+
+search.onclick = listFiles
 
 async function logIn() {
     try {
