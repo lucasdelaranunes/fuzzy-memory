@@ -12,7 +12,9 @@ if (localStorage.getItem('access_token') != null){
   search.onclick = listFiles
 
 } else if (window.location.hash != ''){
+  pattern = '&token.*';
   access_token = window.location.hash.substring(14);
+  access_token = access_token.replace(pattern, '');
   console.log(access_token);
   localStorage.setItem('access_token', access_token);
   document.getElementById('login').style.visibility = 'hidden';
@@ -29,6 +31,8 @@ async function logIn() {
       throw e;
     }
   }
+
+  "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project."
 
 function logOut() {
 
