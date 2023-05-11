@@ -5,6 +5,11 @@ if (localStorage.getItem('access_token') != null){
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
   document.getElementById('search-form').style.visibility = 'visible';
+
+  let search = document.getElementById('search')
+  const queryInput = document.getElementById('query');
+  search.onclick = listFiles
+
 } else if (window.location.hash != ''){
   access_token = window.location.hash.substring(14);
   console.log(access_token);
@@ -13,6 +18,8 @@ if (localStorage.getItem('access_token') != null){
   document.getElementById('logout').style.visibility = 'visible';
   document.getElementById('search-form').style.visibility = 'visible';
 }
+
+
 
 //&& localStorage.getItem('access_token') == null
 
@@ -28,4 +35,53 @@ async function logIn() {
     }
   }
 
+  function logout() {
+
+    localStorage.removeItem('access_token');
+
+    fetch("https://oauth2.googleapis.com/revoke?token=" + access_token,
+      {
+          method: 'POST',
+          headers: {
+              "Content-type": "application/x-www-form-urlencoded"
+          }
+      })
+      .then((data) => {
+          location.href = "https://lucasdelaranunes.github.io/fuzzy-memory/"
+      })
+  }
+    
+  function listFiles(){
+    const queryInput = document.getElementById('query');
+    searchFiles(`fullText contains '${queryInput.value}'`, 10)
+  }
+
+  function searchFiles(q="", pageSize){
+    document.getElementById('results-table').style.visibility = 'visible';
+    let result = document.getElementById('result')
+    result.innerHTML = ''
+
+    console.log(q)
+
+    fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&pageSize=${pageSize}&supportsAllDrives=true&fields=files(id,name,mimeType)`, {
+      method: 'GET',
+      headers:new Headers({Authorization:"Bearer " + info['access_token']})
+    })
+    .then((res) => res.json())
+    .then((info) => {
+      console.log(info)
+      info.files.forEach(file => {
+        let id = file.id
+        result.innerHTML += `
+
+        <tr>
+          <td>
+            <a target="_blank" href="https://drive.google.com/file/d/${file.id}">${file.name}</a>
+          </td>
+          <td>${file.mimeType}</td>
+        `
+      });
+
+    })
+  }
   //LINK = https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://lucasdelaranunes.github.io/fuzzy-memory/&prompt=consent&response_type=token&client_id=499617837412-k3gsjdg3hd9tg5u9ivdjdhnbj9ir30ki.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/drive.readonly&access_type=online
