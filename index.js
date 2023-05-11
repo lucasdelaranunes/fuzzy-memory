@@ -1,6 +1,6 @@
 async function logIn() {
     try {
-      const response = await fetch("https://raw.githubusercontent.com/EricRibeiro/nfl-rushing/master/rushing.json");
+      const response = await fetch("https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://lucasdelaranunes.github.io/fuzzy-memory/&prompt=consent&response_type=token&client_id=499617837412-k3gsjdg3hd9tg5u9ivdjdhnbj9ir30ki.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/drive.readonly&access_type=online");
       const players = await response.json();
       console.log(players);
     } catch (e) {
@@ -8,3 +8,5 @@ async function logIn() {
       throw e;
     }
   }
+
+  //LINK = https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://lucasdelaranunes.github.io/fuzzy-memory/&prompt=consent&response_type=token&client_id=499617837412-k3gsjdg3hd9tg5u9ivdjdhnbj9ir30ki.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/drive.readonly&access_type=online
