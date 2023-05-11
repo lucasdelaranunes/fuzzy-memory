@@ -1,14 +1,20 @@
 if (localStorage.getItem('access_token') != null){
   access_token = localStorage.getItem('access_token')
-  console.log("got token from localStorage, token:");
+  console.log("got token from localStorage, token:"); 
   console.log(access_token);
-}
-
-if (window.location.hash != '' && localStorage.getItem('access_token') == null){
+  document.getElementById('login').style.visibility = 'hidden';
+  document.getElementById('logout').style.visibility = 'visible';
+  document.getElementById('search-form').style.visibility = 'visible';
+} else if (window.location.hash != ''){
   access_token = window.location.hash.substring(14);
   console.log(access_token);
   localStorage.setItem('access_token', access_token);
+  document.getElementById('login').style.visibility = 'hidden';
+  document.getElementById('logout').style.visibility = 'visible';
+  document.getElementById('search-form').style.visibility = 'visible';
 }
+
+//&& localStorage.getItem('access_token') == null
 
 async function logIn() {
     try {
