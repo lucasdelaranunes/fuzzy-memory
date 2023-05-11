@@ -12,9 +12,9 @@ if (localStorage.getItem('access_token') != null){
   search.onclick = listFiles
 
 } else if (window.location.hash != ''){
-  pattern = '&token.*';
-  access_token2 = window.location.hash.substring(14);
-  access_token = access_token2.replace(pattern, '');
+  pattern = /&token.*/;
+  access_token = window.location.hash.substring(14);
+  access_token = access_token.replace(pattern, '');
   console.log(access_token);
   localStorage.setItem('access_token', access_token);
   document.getElementById('login').style.visibility = 'hidden';
