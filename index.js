@@ -75,7 +75,7 @@ function searchFiles(q="", pageSize){
       let id = file.id
       result.innerHTML += `
 
-      <tr>
+      <tr> 
         <td>
           <img src=${file.thumbnailLink}>
         </td>
