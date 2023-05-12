@@ -58,7 +58,6 @@ function listFiles(){
 }
 
 function searchFiles(q="", pageSize){
-  var options = { year: 'numeric', month: 'long', day: 'numeric' };
   document.getElementById('results-table').style.visibility = 'visible';
   let result = document.getElementById('result')
   result.innerHTML = ''
@@ -73,10 +72,7 @@ function searchFiles(q="", pageSize){
   .then((info) => {
     console.log(info)
     info.files.forEach(file => {
-      let date = new Date(file.modifiedTime)
-      console.log(file.modifiedTime)
-      console.log(date)
-      // date = date.toLocaleDateString("en-US", options)
+      let date = new Date(file.modifiedTime).toDateString
       let id = file.id
       result.innerHTML += `
 
