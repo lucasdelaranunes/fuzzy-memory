@@ -72,7 +72,7 @@ function searchFiles(q="", pageSize){
   .then((info) => {
     console.log(info)
     info.files.forEach(file => {
-      let date = new Date(file.modifiedTime).toDateString
+      let date = new Date(file.modifiedTime).toDateString()
       let id = file.id
       result.innerHTML += `
 
