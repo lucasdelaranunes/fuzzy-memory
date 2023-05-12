@@ -77,7 +77,7 @@ function searchFiles(q="", pageSize){
 
       <tr>
         <td>
-          <img src=${file.image}>
+          <img src=${file.thumbnailLink}>
         </td>
         <td>
           <a target="_blank" href="https://drive.google.com/file/d/${file.id}">${file.name}</a>
