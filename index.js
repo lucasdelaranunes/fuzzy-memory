@@ -64,7 +64,7 @@ function searchFiles(q="", pageSize){
 
   console.log(q)
 
-  fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&pageSize=${pageSize}&supportsAllDrives=true&fields=files(id,name,mimeType)`, {
+  fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&pageSize=${pageSize}&supportsAllDrives=true&fields=files(id,image,name,owners,modifiedTime)`, {
     method: 'GET',
     headers:new Headers({Authorization:"Bearer " + access_token})
   })
@@ -77,9 +77,17 @@ function searchFiles(q="", pageSize){
 
       <tr>
         <td>
+          <img src=${file.image}>
+        </td>
+        <td>
           <a target="_blank" href="https://drive.google.com/file/d/${file.id}">${file.name}</a>
         </td>
-        <td>${file.mimeType}</td>
+        <td>
+          ${file.owners}
+        </td>
+        <td>
+          ${file.modifiedTime}
+        </td>
       `
     });
 
