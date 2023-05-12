@@ -84,7 +84,7 @@ function searchFiles(q="", pageSize){
           <a target="_blank" href="https://drive.google.com/file/d/${file.id}">${file.name}</a>
         </td>
         <td>
-          <img src=${file.owners[0].photoLink}>
+          <img id="ownerimg" src=${file.owners[0].photoLink}>
           ${file.owners[0].displayName}
         </td>
         <td>

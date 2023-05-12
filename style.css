@@ -263,3 +263,9 @@ a .pageNumber {
         background-position: 200% center;
     }
 }
+
+.ownerimgs {
+    border-radius: 50%;
+    width: 24;
+    height: 24;
+}
