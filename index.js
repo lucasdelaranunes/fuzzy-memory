@@ -74,7 +74,8 @@ function searchFiles(q="", pageSize){
     console.log(info)
     info.files.forEach(file => {
       let date = new Date(file.modifiedTime)
-      date = date.toLocaleDateString("en-US", options)
+      console.log(date)
+      // date = date.toLocaleDateString("en-US", options)
       let id = file.id
       result.innerHTML += `
 
