@@ -58,6 +58,7 @@ function listFiles(){
 }
 
 function searchFiles(q="", pageSize){
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
   document.getElementById('results-table').style.visibility = 'visible';
   let result = document.getElementById('result')
   result.innerHTML = ''
@@ -72,6 +73,8 @@ function searchFiles(q="", pageSize){
   .then((info) => {
     console.log(info)
     info.files.forEach(file => {
+      let date = Date(file.modifiedTime)
+      date = date.toLocaleDateString("en-US", options)
       let id = file.id
       result.innerHTML += `
 
@@ -83,11 +86,11 @@ function searchFiles(q="", pageSize){
           <a target="_blank" href="https://drive.google.com/file/d/${file.id}">${file.name}</a>
         </td>
         <td>
-          <img src=${file.owners.photoLink}>
-          ${file.owners.displayName}
+          <img src=${file.owners[0].photoLink}>
+          ${file.owners[0].displayName}
         </td>
         <td>
-          ${file.modifiedTime}
+          ${date}
         </td>
       `
     });
