@@ -7,6 +7,7 @@ if (localStorage.getItem('access_token') != null){
   console.log(access_token);
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
+  document.getElementById('googleDriveSearchOption').style.visibility = 'visible';
 
 
   let search = document.getElementById('search')
@@ -20,6 +21,7 @@ if (localStorage.getItem('access_token') != null){
   localStorage.setItem('access_token', access_token);
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
+  document.getElementById('googleDriveSearchOption').style.visibility = 'visible';
 
 
 }
