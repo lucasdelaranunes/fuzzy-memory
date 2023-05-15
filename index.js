@@ -1,3 +1,8 @@
+const API_KEY = 'AIzaSyCTS2patAnaBMK_nvqT4127g21b1PLpNBs';
+const SEARCH_ENGINE_ID = '840c18d44097c4952';
+
+const isGoogleDrive = false;
+
 if (localStorage.getItem('access_token') != null){
   access_token = localStorage.getItem('access_token')
   console.log("got token from localStorage, token:"); 
@@ -51,13 +56,17 @@ function logOut() {
         location.href = "https://lucasdelaranunes.github.io/fuzzy-memory/"
     })
 }
-    
+
 function listFiles(){
   const queryInput = document.getElementById('query');
-  searchFiles(`fullText contains '${queryInput.value}'`, 10)
+  if(isGoogleDrive == true){
+    searchFilesGoogleDrive(`fullText contains '${queryInput.value}'`, 10)
+  } else if (isGoogleDrive == false){
+    searchGoogle()
+  }
 }
 
-function searchFiles(q="", pageSize){
+function searchFilesGoogleDrive(q="", pageSize){
   document.getElementById('results-table').style.visibility = 'visible';
   let result = document.getElementById('result')
   result.innerHTML = ''
@@ -95,4 +104,39 @@ function searchFiles(q="", pageSize){
 
   })
 }
-  //LINK = https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://lucasdelaranunes.github.io/fuzzy-memory/&prompt=consent&response_type=token&client_id=499617837412-k3gsjdg3hd9tg5u9ivdjdhnbj9ir30ki.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/drive.readonly&access_type=online
+
+async function searchGoogle(q=""){
+  document.getElementById('results-table').style.visibility = 'visible';
+  let siteResults = document.getElementById('siteResults')
+  siteResults.innerHTML = ''
+  let result = document.getElementById('result')
+  result.innerHTML = ''
+
+  console.log(q)
+
+  const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${q}`);
+  const data = await response.json();
+
+  if (data.items) {
+
+    console.log(data)
+    data.files.forEach(item => {
+      const title = item.title;
+      const description = item.snippet;
+      const thumbnail = item.pagemap.cse_thumbnail ? item.pagemap.cse_thumbnail[0].src : null;
+      const link = item.link;
+
+      siteResults.innerHTML += `
+        <div class='resultContainer'>
+          <h3 class='title'>
+            <a class='result' href=${link} data-linkId='4'>
+                ${title}
+            </a>
+          </h3>
+          <span class='url'>${link}</span>
+          <span class=${description}</span>
+        </div>
+      `
+    });
+  }
+}
