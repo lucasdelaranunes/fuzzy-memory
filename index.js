@@ -1,16 +1,13 @@
 const API_KEY = 'AIzaSyCTS2patAnaBMK_nvqT4127g21b1PLpNBs';
 const SEARCH_ENGINE_ID = '840c18d44097c4952';
 
-const isGoogleDrive = false;
-
 if (localStorage.getItem('access_token') != null){
   access_token = localStorage.getItem('access_token')
   console.log("got token from localStorage, token:"); 
   console.log(access_token);
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
-  document.getElementById('search').style.visibility = 'visible';
-  document.getElementById('query').style.visibility = 'visible';
+
 
   let search = document.getElementById('search')
   const queryInput = document.getElementById('query');
@@ -23,8 +20,7 @@ if (localStorage.getItem('access_token') != null){
   localStorage.setItem('access_token', access_token);
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
-  document.getElementById('search').style.visibility = 'visible';
-  document.getElementById('query').style.visibility = 'visible';
+
 
 }
 
@@ -58,18 +54,38 @@ function logOut() {
 }
 
 function listFiles(){
+  const serviceSelect = document.getElementById('service-select');
+  let selectedService = serviceSelect.value;
   const queryInput = document.getElementById('query');
-  if(isGoogleDrive == true){
+  if(selectedService == 'googleDrive'){
     searchFilesGoogleDrive(`fullText contains '${queryInput.value}'`, 10)
-  } else if (isGoogleDrive == false){
-    searchGoogle()
+  } else if (selectedService == 'google'){
+    searchGoogle(queryInput.value)
   }
 }
 
 function searchFilesGoogleDrive(q="", pageSize){
-  document.getElementById('results-table').style.visibility = 'visible';
+  let siteResults = document.getElementById('siteResults')
+  siteResults.innerHTML = ''
+  let resultsCount = document.getElementById('resultsCount')
+  resultsCount.innerHTML = ''
+
+  siteResults +=`
+    <div class='resultContainer'>
+      <table id ="results-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name of File</th>
+            <th>Owner</th>
+            <th>Last Modification</th>
+          </tr>
+        </thead>
+          <tbody id="result"></tbody>
+      </table>
+    </div>
+  `
   let result = document.getElementById('result')
-  result.innerHTML = ''
 
   console.log(q)
 
@@ -106,9 +122,10 @@ function searchFilesGoogleDrive(q="", pageSize){
 }
 
 async function searchGoogle(q=""){
-  document.getElementById('results-table').style.visibility = 'visible';
   let siteResults = document.getElementById('siteResults')
   siteResults.innerHTML = ''
+  let resultsCount = document.getElementById('resultsCount')
+  resultsCount.innerHTML = ''
 
   console.log(q)
 
@@ -116,9 +133,10 @@ async function searchGoogle(q=""){
   const data = await response.json();
 
   if (data.items) {
-
+    
     console.log(data)
-    data.files.forEach(item => {
+    resultsCount.innerHTML = `About ${data.searchInformation.formattedTotalResults} results in ${data.searchInformation.formattedSearchTime} seconds.`
+    data.items.forEach(item => {
       const title = item.title;
       const description = item.snippet;
       const thumbnail = item.pagemap.cse_thumbnail ? item.pagemap.cse_thumbnail[0].src : null;
@@ -132,7 +150,7 @@ async function searchGoogle(q=""){
             </a>
           </h3>
           <span class='url'>${link}</span>
-          <span class=${description}</span>
+          <span class='description'>${description}</span>
         </div>
       `
     });
