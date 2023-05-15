@@ -64,6 +64,29 @@ function listFiles(){
   }
 }
 
+
+function addTable(){
+  let siteResults = document.getElementById('siteResults')
+  siteResults.innerHTML = ''
+
+  siteResults.innerHTML +=`
+    <div class='resultContainer'>
+      <table id ="results-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name of File</th>
+            <th>Owner</th>
+            <th>Last Modification</th>
+          </tr>
+        </thead>
+          <tbody id="result"></tbody>
+      </table>
+    </div>
+  `
+
+}
+
 function searchFilesGoogleDrive(q="", pageSize){
   let siteResults = document.getElementById('siteResults')
   siteResults.innerHTML = ''
