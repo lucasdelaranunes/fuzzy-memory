@@ -70,7 +70,7 @@ function searchFilesGoogleDrive(q="", pageSize){
   let resultsCount = document.getElementById('resultsCount')
   resultsCount.innerHTML = ''
 
-  siteResults +=`
+  siteResults.innerHTML +=`
     <div class='resultContainer'>
       <table id ="results-table">
         <thead>
