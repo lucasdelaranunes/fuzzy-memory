@@ -109,8 +109,6 @@ async function searchGoogle(q=""){
   document.getElementById('results-table').style.visibility = 'visible';
   let siteResults = document.getElementById('siteResults')
   siteResults.innerHTML = ''
-  let result = document.getElementById('result')
-  result.innerHTML = ''
 
   console.log(q)
 
