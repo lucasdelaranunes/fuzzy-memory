@@ -27,6 +27,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    height: 100vh;
+
 }
 .wrapper.indexPage {
     justify-content: center;
@@ -165,8 +167,8 @@ body {
     margin-left: 150px;
 }
 
-.siteResults1 .googleDriveResults {
-    margin-left: 10px;
+.mainResultsSection .siteResults {
+    margin-left: 150px;
 }
 
 .resultContainer {
@@ -270,27 +272,19 @@ a .pageNumber {
     height: 24px;
 }
 
-/* Set the wrapper to occupy the entire screen */
-  #mainResultsSection {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-  }
-  
-  /* Divide the screen into two equal halves */
-  #siteResults,
-  #googleDriveResults {
+.siteResults {
     width: 50%;
-    height: 100%;
   }
   
-  /* Style the siteResults div */
-  #siteResults {
-    background-color: lightgray;
+  .googleDriveResults {
+    width: 50%;
+  }
+
+  .header {
+    width: 100%; /* Optional: Adjust as needed */
   }
   
-  /* Style the googleDriveResults div */
-  #googleDriveResults {
-    background-color: lightblue;
+  .searchContainer {
+    width: 100%; /* Optional: Adjust as needed */
   }
   
