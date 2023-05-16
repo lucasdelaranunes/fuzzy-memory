@@ -1,4 +1,4 @@
-/* * {
+* {
     font-family: arial, sans-serif;
     color: #545454;
 }
@@ -165,8 +165,8 @@ body {
     margin-left: 150px;
 }
 
-.mainResultsSection .siteResults {
-    margin-left: 150px;
+.siteResults1 .googleDriveResults {
+    margin-left: 10px;
 }
 
 .resultContainer {
@@ -268,29 +268,29 @@ a .pageNumber {
     border-radius: 50%;
     width: 24px;
     height: 24px;
-} */
+}
 
 /* Set the wrapper to occupy the entire screen */
-.wrapper {
+  #mainResultsSection {
     width: 100%;
     height: 100vh;
     display: flex;
   }
   
   /* Divide the screen into two equal halves */
-  .siteResults,
-  .googleDriveResults {
+  #siteResults,
+  #googleDriveResults {
     width: 50%;
     height: 100%;
   }
   
   /* Style the siteResults div */
-  .siteResults {
+  #siteResults {
     background-color: lightgray;
   }
   
   /* Style the googleDriveResults div */
-  .googleDriveResults {
+  #googleDriveResults {
     background-color: lightblue;
   }
   
