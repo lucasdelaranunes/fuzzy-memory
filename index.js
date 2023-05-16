@@ -7,11 +7,9 @@ if (localStorage.getItem('access_token') != null){
   console.log(access_token);
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
-  document.getElementById('googleDriveSearchOption').style.visibility = 'visible';
 
 
   let search = document.getElementById('search')
-  const queryInput = document.getElementById('query');
 
 } else if (window.location.hash != ''){
   pattern = /&token.*/;
@@ -21,7 +19,6 @@ if (localStorage.getItem('access_token') != null){
   localStorage.setItem('access_token', access_token);
   document.getElementById('login').style.visibility = 'hidden';
   document.getElementById('logout').style.visibility = 'visible';
-  document.getElementById('googleDriveSearchOption').style.visibility = 'visible';
 
 
 }
@@ -56,7 +53,6 @@ function logOut() {
 }
 
 function listFiles(){
-  const serviceSelect = document.getElementById('service-select');
   const queryInput = document.getElementById('query');
   searchFilesGoogleDrive(`fullText contains '${queryInput.value}'`, 10)
   searchGoogle(queryInput.value)
@@ -149,7 +145,7 @@ async function searchGoogle(q=""){
   <p class='resultsCount' id = 'resultsCount'></p>
   `
   let resultsCount = document.getElementById('resultsCount')
-  
+
   const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${q}`);
   const data = await response.json();
 
