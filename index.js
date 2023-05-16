@@ -57,13 +57,10 @@ function logOut() {
 
 function listFiles(){
   const serviceSelect = document.getElementById('service-select');
-  let selectedService = serviceSelect.value;
   const queryInput = document.getElementById('query');
-  if(selectedService == 'googleDrive'){
-    searchFilesGoogleDrive(`fullText contains '${queryInput.value}'`, 10)
-  } else if (selectedService == 'google'){
-    searchGoogle(queryInput.value)
-  }
+  searchFilesGoogleDrive(`fullText contains '${queryInput.value}'`, 10)
+  searchGoogle(queryInput.value)
+
 }
 
 
@@ -90,12 +87,11 @@ function addTable(){
 }
 
 function searchFilesGoogleDrive(q="", pageSize){
-  let siteResults = document.getElementById('siteResults')
-  siteResults.innerHTML = ''
-  let resultsCount = document.getElementById('resultsCount')
-  resultsCount.innerHTML = ''
+  let googleDriveResults = document.getElementById('googleDriveResults')
+  googleDriveResults.innerHTML = ''  
 
-  siteResults.innerHTML +=`
+
+  googleDriveResults.innerHTML +=`
     <div class='resultContainer'>
       <table id ="results-table">
         <thead>
@@ -151,9 +147,6 @@ async function searchGoogle(q=""){
   siteResults.innerHTML = ''
   let resultsCount = document.getElementById('resultsCount')
   resultsCount.innerHTML = ''
-
-  console.log(q)
-
   const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${q}`);
   const data = await response.json();
 
