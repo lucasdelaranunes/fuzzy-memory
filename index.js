@@ -145,8 +145,11 @@ function searchFilesGoogleDrive(q="", pageSize){
 async function searchGoogle(q=""){
   let siteResults = document.getElementById('siteResults')
   siteResults.innerHTML = ''
+  siteResults.innerHTML +=`
+  <p class='resultsCount' id = 'resultsCount'></p>
+  `
   let resultsCount = document.getElementById('resultsCount')
-  resultsCount.innerHTML = ''
+  
   const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${q}`);
   const data = await response.json();
 
