@@ -164,12 +164,9 @@ body {
 .mainResultsSection .resultsCount {
     font-size: 13px;
     color: #808080;
-    margin-left: 150px;
+
 }
 
-.mainResultsSection .siteResults {
-    margin-left: 150px;
-}
 
 .resultContainer {
     display: flex;
