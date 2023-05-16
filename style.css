@@ -269,6 +269,10 @@ a .pageNumber {
     height: 24px;
 }
 
+#mainResultSection{
+    display: flex;
+}
+
 .siteResults {
     width: 50%;
   }
