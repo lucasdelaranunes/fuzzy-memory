@@ -1,4 +1,4 @@
-* {
+/* * {
     font-family: arial, sans-serif;
     color: #545454;
 }
@@ -268,7 +268,7 @@ a .pageNumber {
     border-radius: 50%;
     width: 24px;
     height: 24px;
-}
+} */
 
 /* Set the wrapper to occupy the entire screen */
 .wrapper {
